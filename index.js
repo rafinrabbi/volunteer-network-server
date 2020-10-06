@@ -29,6 +29,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Volunteer Network Server");
 });
 
+//const client = new MongoClient(uri, { useNewUrlParser: true });
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -53,7 +55,7 @@ client.connect((err) => {
 
   app.post("/addEvent", (req, res) => {
     const events = req.body;
-    eventsCollection.insertOne(events).then((result) => {
+    eventsCollection.insertMany(events).then((result) => {
       res.send(result.insertedCount);
     });
   });
